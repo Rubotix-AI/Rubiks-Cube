@@ -1,30 +1,40 @@
 import cv2
-from opencv import extract_face
+import numpy as np
 
-cap = cv2.VideoCapture(0)
-while True:
-    ret, frame = cap.read()
-    if not ret:
+from processing import findFace
+
+cube_mat = np.zeros((6, 3, 3), dtype='uint8')
+
+feed = cv2.VideoCapture(2)
+if not feed.isOpened():
+    print("Cannot Open Camera")
+    exit()
+
+faceID = 0
+indicator = 0
+cube = []
+
+while True and len(cube) < 7 and faceID < 54:
+    read, frame = feed.read()
+
+    if not read:
+        print("Can't recieve feed from camera.")
         break
 
-    color = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    cv2.rectangle(color, (5, 5), (210, 210), (255, 0, 0), 2)
-    cv2.rectangle(color, (5,5), (140,210), (255, 0, 0), 2)
-    cv2.rectangle(color, (5, 5), (70, 210), (255, 0, 0), 2)
-    cv2.rectangle(color, (5,5), (210,140), (255, 0, 0), 2)
-    cv2.rectangle(color, (5, 5), (210, 70), (255, 0, 0), 2)
+    key = cv2.waitKey(20)
+    
+    face_info, processed_frame = findFace(frame=frame, id=faceID)
 
+    cv2.imshow('frame', processed_frame)
 
-    cv2.imshow('frame', color)
-    key_press = cv2.waitKey(1) & 0xFF
+    if key == ord('c'):
+        cube.append(face_info)
+        faceID += 9
 
-    faces = []
-
-    if key_press == ord('q'):
+    if key == ord('q'):
         break
-    elif key_press == ord('c'):
-        faces.append(extract_face(frame=color))
 
+print(cube)
 
-cap.release()
+feed.release()
 cv2.destroyAllWindows()
