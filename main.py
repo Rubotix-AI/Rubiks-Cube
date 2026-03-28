@@ -5,20 +5,19 @@ from processing import findFace
 
 cube_mat = np.zeros((6, 3, 3), dtype='uint8')
 
-feed = cv2.VideoCapture(2)
+feed = cv2.VideoCapture(2) # External Webcam
 if not feed.isOpened():
     print("Cannot Open Camera")
     exit()
 
 faceID = 0
-indicator = 0
 cube = []
 
 while True and len(cube) < 7 and faceID < 54:
     read, frame = feed.read()
 
     if not read:
-        print("Can't recieve feed from camera.")
+        print("Cannot recieve feed from camera.")
         break
 
     key = cv2.waitKey(20)
@@ -32,6 +31,7 @@ while True and len(cube) < 7 and faceID < 54:
         faceID += 9
 
     if key == ord('q'):
+        print("Exiting feed read.")
         break
 
 print(cube)
