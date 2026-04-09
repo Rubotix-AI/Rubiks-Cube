@@ -1,4 +1,25 @@
 import math
+import numpy as np
+from config import KMEANS_K, RANDOM_STATE
+from sklearn.cluster import KMeans
+
+def getDominantColor(frame):
+    frame = np.array(frame)
+    frame = np.float32(frame.reshape((-1, 3)))
+
+    k = KMEANS_K
+    random_state = RANDOM_STATE
+    model = KMeans(n_clusters=k, random_state=random_state)
+    model.fit(frame)
+
+    dominant_color = model.cluster_centers_.astype(int)
+    counts = np.unique(model.labels_, return_counts=True)[1]
+    props = counts / counts.sum()
+
+    sorted = np.argsort(-props) # minus cause decreasing order
+    most_dom = dominant_color[sorted[0]]
+
+    return most_dom
 
 # Source - https://stackoverflow.com/a/16020102
 def bgr2lab ( inputColor ) :
