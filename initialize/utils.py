@@ -1,6 +1,6 @@
 import math
 import numpy as np
-from helper.config import KMEANS_K, RANDOM_STATE
+from initialize.config import KMEANS_K, RANDOM_STATE
 from sklearn.cluster import KMeans
 
 def getDominantColor(frame):
