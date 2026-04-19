@@ -1,6 +1,6 @@
 import cv2
-from utils import bgr2lab, CIEDE2000, getDominantColor
-from config import BGR_COLOURS, THRESH_COL_DELTA, SQUARE_RATIO_BOUNDS, SQUARE_AREA_MIN, RANDOM_STATE, KMEANS_K, CELL_CORRECTION_FACTOR
+from initialize.utils import bgr2lab, CIEDE2000, getDominantColor
+from initialize.config import BGR_COLOURS, THRESH_COL_DELTA, SQUARE_RATIO_BOUNDS, SQUARE_AREA_MIN, RANDOM_STATE, KMEANS_K, CELL_CORRECTION_FACTOR
 
 def initialProcess(frame):
     converted_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)

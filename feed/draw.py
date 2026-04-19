@@ -1,5 +1,5 @@
 import cv2
-from config import CELL_CORRECTION_FACTOR
+from helper.config import CELL_CORRECTION_FACTOR
 
 def drawFace(frame, possible_squares, id):
     face = []

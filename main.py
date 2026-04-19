@@ -1,7 +1,8 @@
 import cv2
 import numpy as np
 
-from processing import findFace
+from feed.processing import findFace
+from solver import solve
 
 cube_mat = np.zeros((6, 3, 3), dtype='uint8')
 
@@ -34,7 +35,9 @@ while True and len(cube) < 7 and faceID < 54:
         print("Exiting feed read.")
         break
 
-print(cube)
+if len(cube) == 6:
+    moves = solve(cube)
+    print(moves)
 
 feed.release()
 cv2.destroyAllWindows()
