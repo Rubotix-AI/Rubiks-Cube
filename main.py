@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 from feed.processing import findFace
-from solver import solve
+from solver.kociemba_solver import solve
 
 cube_mat = np.zeros((6, 3, 3), dtype='uint8')
 

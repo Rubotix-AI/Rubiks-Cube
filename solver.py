@@ -1,4 +1,0 @@
-
-
-def solve(cube):
-    pass
